@@ -48,6 +48,9 @@ angular.module('monospaced.elastic', [])
           ta.value = text;
 
           var append = attrs.msdElastic ? attrs.msdElastic.replace(/\\n/g, '\n') : config.append,
+              sizeToPlaceholder = attrs.msdSizeToPlaceholder
+                ? attrs.msdSizeToPlaceholder === 'true'
+                : !!config.sizeToPlaceholder,
               $win = angular.element($window),
               mirrorInitStyle = 'position: absolute; top: -999px; right: auto; bottom: auto;' +
                                 'left: 0; overflow: hidden; -webkit-box-sizing: content-box;' +
@@ -137,7 +140,8 @@ angular.module('monospaced.elastic', [])
             if (!active) {
               active = true;
 
-              mirror.value = ta.value + append; // optional whitespace to improve animation
+              // optional whitespace to improve animation
+              mirror.value = (ta.value || (sizeToPlaceholder ? $ta.attr('placeholder') : '') || '') + append;
               mirror.style.overflowY = ta.style.overflowY;
 
               taHeight = ta.style.height === '' ? 'auto' : parseInt(ta.style.height, 10);

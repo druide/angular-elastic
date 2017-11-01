@@ -36,6 +36,12 @@ or configure whitespace globally
       msdElasticConfig.append = '\n';
     }])
 
+optionally size to placeholder when text is empty
+    
+    <textarea msd-elastic msd-size-to-placeholder="true" placeholder="Input something here..." ng-model="foo">
+      ...
+    </textarea>
+
 the directive also emits an `elastic:resize` event which you can listen for
 
     $scope.$on('elastic:resize', function(event, element, oldHeight, newHeight) {
